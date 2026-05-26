@@ -1,35 +1,98 @@
 # Documentation: https://rmk.rs/docs/configuration.html
+# 参考https://rmk.rs/docs/configuration/appendix
+
 [keyboard]
-name = "RMK Keyboard"
-product_name = "RMK Keyboard"
-vendor_id = 0x4c4b
-product_id = 0x4643
-manufacturer = "RMK"
-chip = "rp2040"
+name = "makey42"
+product_name = "makey42"
+vendor_id = 0xFEED
+product_id = 0x6060
+manufacturer = "mark1028"
+chip = "nrf52840"
+usb_enable = true
 
 [matrix]
 # Row and col pins are mandatory
-row_pins = ["PIN_6", "PIN_7", "PIN_8", "PIN_9"]
-col_pins = ["PIN_19", "PIN_20", "PIN_21"]
+matrix_type = "normal"    # matrix_type = "direct_pin"
+row_pins = ["P0_17", "P1_09", "P0_30", "P0_31", "P0_29"]
+col_pins = ["P0_07", "P0_12", "P0_04", "P0_08", "P0_06", "P0_26", "P0_15", "P0_02", "P1_02", "P1_13"]
+row2col = false
+
 
 # RMK uses col2row as the default matrix diode direction, if you want to use a row2col matrix, add `row2col = true`
 # row2col = true
 
 [layout]
-rows = 4
-cols = 3
-layers = 2
-keymap = [
-    [
-        ["A", "B", "C"],
-        ["Kc1", "Kc2", "Kc3"],
-        ["LCtrl", "MO(1)", "LShift"],
-        ["OSL(1)", "LT(2, Kc9)", "LM(1, LShift | LGui)"]
-    ],
-    [
-        ["_", "TT(1)", "TG(2)"],
-        ["_", "_", "_"],
-        ["_", "_", "_"],
-        ["_", "_", "_"]
-    ],
-]
+rows = 5
+cols = 10
+layers = 4
+matrix_map = """
+(0,0,R) (0,1,R) (0,2,R) (0,3,R) (0,4,R) (0,5,R) (0,6,R)
+(1,0,R) (1,1,R) (1,2,R) (1,3,R) (1,4,R) (1,5,R) (1,6,R)
+(2,0,R) (2,1,R) (2,2,R) (2,3,R) (2,4,R) (2,5,R) (2,6,R)
+(3,0,R) (3,1,R) (3,2,R) (3,3,R) (3,4,R) (3,5,R) (3,6,R) (3,7,R)
+(4,0,R) (4,1,R) (4,2,R) (4,3,R) (4,4,R) (4,5,R) (4,6,R) (4,7,R) (4,8,R) (4,9,R)
+"""
+
+# layer 0 (default):
+# (the number comes from the order of '[[layer]] entries' in the file)
+[[layer]]
+name = "base_layer" #optional name for the layer
+keys = """
+NumLock KpSlash KpAsterisk KpMinus
+Kp7     Kp8     Kp9        KpPlus
+Kp4     Kp5     Kp6
+Kp1     Kp2     Kp3        Enter
+    Kp0         KpDot
+"""
+
+# layer 1:
+[[layer]]
+name = "mouse_navigation" #optional name for the layer
+keys = """
+TO(base_layer)   @MyCut     @MyCopy          @MyPaste
+MouseBtn1        MouseUp    MouseBtn2        MouseWheelUp
+MouseLeft        MouseBtn4  MouseRight
+MouseWheelLeft   MouseDown  MouseWheelRight  MouseWheelDown
+          MouseBtn1         MouseBtn2
+"""
+
+[ble]
+enabled = true
+battery_adc_pin = "P0_05"
+# charge_state.pin = "P0_07"
+# charge_state.low_active = true
+charge_led.pin = "P1_00"
+charge_led.low_active = false
+adc_divider_measured = 2000
+adc_divider_total = 2820
+
+# Encoder 0
+[[input_device.encoder]]
+pin_a = "P0_03"
+pin_b = "P0_28"
+#phase = "default" 
+phase = "resolution" # 分辨率选项，此项为自定义分辨率
+resolution = 4      # 自定义分辨率
+reverse = true       # 旋转方向：反向
+internal_pullup = true  # 使用mcu内部上拉电阻
+
+# Encoder 1
+[[input_device.encoder]]
+pin_a = "P1_119"
+pin_b = "P1_10"
+#phase = "default" 
+phase = "resolution" 
+resolution = 4
+reverse = true
+internal_pullup = true  # 使用mcu内部上拉电阻
+
+# Encoder 2
+[[input_device.encoder]]
+pin_a = "P0_13"
+pin_b = "P0_24"
+#phase = "default" 
+phase = "resolution"
+resolution = 4
+reverse = true 
+# Whether to use the MCU's internal pull-up resistor, default to false 是否使用MCU的内部上拉电阻，默认为false
+internal_pullup = true  # 使用mcu内部上拉电阻，如果编码器没有外接上拉电阻，则必须开启此项功能！
