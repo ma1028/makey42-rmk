@@ -69,10 +69,10 @@ adc_divider_total = 2820
 
 [light]
 # All light pins are high-active by default, uncomment if you want it to be low-active
-capslock.pin = "P0_20"
+capslock.pin = "P0_20"   # capslock = { pin = "PIN_0", low_active = true }
 capslock.low_active = false
-charge_led.pin = "P1_00"
-charge_led.low_active = false
+# charge_led.pin = "P1_00"
+# charge_led.low_active = false
 
 # Encoder 0
 [[input_device.encoder]]
