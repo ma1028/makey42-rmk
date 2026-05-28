@@ -2,7 +2,7 @@
     "name": "makey42",
     "vendorId": "0xFEED",
     "productId": "0x6060",
-    "lighting": "RGB",
+    "lighting": "none",
     "matrix": {
         "rows": 5,
         "cols": 10
