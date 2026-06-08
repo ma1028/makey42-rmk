@@ -76,8 +76,8 @@ capslock.low_active = false
 
 # Encoder 0
 [[input_device.encoder]]
-pin_a = "P0_03"
-pin_b = "P0_28"
+pin_a = "P0_13"
+pin_b = "P0_24"
 #phase = "default" 
 phase = "resolution" # 分辨率选项，此项为自定义分辨率
 resolution = 4      # 自定义分辨率
@@ -96,8 +96,8 @@ internal_pullup = true  # 使用mcu内部上拉电阻
 
 # Encoder 2
 [[input_device.encoder]]
-pin_a = "P0_13"
-pin_b = "P0_24"
+pin_a = "P0_03"
+pin_b = "P0_28"
 #phase = "default" 
 phase = "resolution"
 resolution = 4
