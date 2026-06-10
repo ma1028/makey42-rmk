@@ -1,7 +1,7 @@
 {
     "name": "makey42",
     "vendorId": "0xFEED",
-    "productId": "0x6060",
+    "productId": "0x6080",
     "lighting": "none",
     "matrix": {
         "rows": 5,
